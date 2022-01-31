@@ -51,7 +51,7 @@ const createLeftMenu = () => {
     submenu: [
       new MenuItem({
         label: "quit",
-        accelerator:"Cmd+Q",
+        accelerator: "Cmd+Q",
         click: () => {
           quit()
         }
@@ -74,13 +74,17 @@ const createTray = () => {
 
 const show = () => {
   mainWindow.show()
-  app.dock.show()
+  if(process.platform == "darwin" ) {
+    app.dock.show()
+  }
 }
 const hide = () => {
   //ここが動くのmacだけかも
-  app.hide()
-  app.dock.hide()
-  mainWindow.blur()
+  if (process.platform == "darwin") {
+    app.hide()
+    app.dock.hide()
+    mainWindow.blur()
+  }
 }
 
 const quit = () => {
@@ -101,7 +105,9 @@ app.on('ready', () => {
 });
 
 app.on('ready', () => {
-  app.dock.hide()
+  if(process.platform == "darwin"){
+    app.dock.hide()
+  }
 })
 
 //初期配列を取得
