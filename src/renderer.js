@@ -323,9 +323,12 @@ window.onload = () => {
         arrayToItem(taskArray)
       }
     }
+
+    //taskArrayをMainと同期する
+    saveTaskArray(taskArray);
   }
 }
 
-ipcRenderer.on("quit", (event) => {
-  event.sender.send("saveThenQuit", taskArray)
-})
+const saveTaskArray = (taskArray)=>{
+  ipcRenderer.send("saveTaskArray", taskArray)
+}

@@ -38,6 +38,13 @@ const createWindow = () => {
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
+  //window位置を保存して終了
+  mainWindow.on("close", (event)=>{
+    // ウィンドウの座標を記録
+    store.set('window.pos', mainWindow.getPosition())  
+    // ウィンドウのサイズを記録
+    store.set('window.size', mainWindow.getSize())     
+  })
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
 };
@@ -51,9 +58,9 @@ const createLeftMenu = () => {
     submenu: [
       new MenuItem({
         label: "quit",
-        accelerator: "Cmd+Q",
+        accelerator: "CommandOrControl+Q",
         click: () => {
-          quit()
+          app.quit()
         }
       }),
       new MenuItem({
@@ -87,9 +94,6 @@ const hide = () => {
   }
 }
 
-const quit = () => {
-  mainWindow.webContents.send("quit")
-}
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
@@ -120,12 +124,9 @@ ipcMain.on("getInitialArray", (event) => {
   return
 })
 
-//保存して終了
-ipcMain.on("saveThenQuit", (event, taskArray) => {
+//taskArrayをstoreに保存
+ipcMain.on("saveTaskArray", (event, taskArray) => {
   store.set("task", taskArray)//taskArrayの状態
-  store.set('window.pos', mainWindow.getPosition())  // ウィンドウの座標を記録
-  store.set('window.size', mainWindow.getSize())     // ウィンドウのサイズを記録
-  app.quit()
 })
 
 function getCenterPosition() {
