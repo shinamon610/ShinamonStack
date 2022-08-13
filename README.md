@@ -15,10 +15,10 @@ here is all command.
 * n : push new task
 * y : pop task
 * r : rename selected task
-* j : select task below
-* k : select task ubove
-* h : swap selected task for below one
-* l : swap selected task for ubove one
+* j or down: select task below
+* k or up: select task ubove
+* h or left: swap selected task for below one
+* l or right: swap selected task for ubove one
 * m : edit memo
 * u : restore last removed task
 

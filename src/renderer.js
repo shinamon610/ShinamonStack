@@ -252,14 +252,14 @@ window.onload = () => {
         arrayToItem(taskArray)
       }
     }
-    else if (e.key === "j") {
+    else if (e.key === "j" || e.key === "ArrowDown") {
       if (getCurrentState(taskArray) === State.normal) {
         //下のtaskを選択する
         selectTaskBelow(taskArray)
         //再描写
         arrayToItem(taskArray)
       }
-    } else if (e.key === "k") {
+    } else if (e.key === "k" || e.key === "ArrowUp") {
       if (getCurrentState(taskArray) === State.normal) {
         //上のタスクを選択する
         selectTaskAbove(taskArray)
@@ -267,7 +267,7 @@ window.onload = () => {
         arrayToItem(taskArray)
       }
     }
-    else if (e.key === "h") {
+    else if (e.key === "h" || e.key === "ArrowLeft") {
       if (getCurrentState(taskArray) === State.normal) {
         //下のタスクと入れ替える
         taskArray = swapTaskBelow(taskArray)
@@ -275,7 +275,7 @@ window.onload = () => {
         arrayToItem(taskArray)
       }
     }
-    else if (e.key === "l") {
+    else if (e.key === "l" || e.key === "ArrowRight") {
       if (getCurrentState(taskArray) === State.normal) {
         //上のタスクと入れ替える
         taskArray = swapTaskAbove(taskArray)
@@ -329,6 +329,6 @@ window.onload = () => {
   }
 }
 
-const saveTaskArray = (taskArray)=>{
+const saveTaskArray = (taskArray) => {
   ipcRenderer.send("saveTaskArray", taskArray)
 }
