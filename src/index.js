@@ -39,11 +39,11 @@ const createWindow = () => {
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
   //window位置を保存して終了
-  mainWindow.on("close", (event)=>{
+  mainWindow.on("close", (event) => {
     // ウィンドウの座標を記録
-    store.set('window.pos', mainWindow.getPosition())  
+    store.set('window.pos', mainWindow.getPosition())
     // ウィンドウのサイズを記録
-    store.set('window.size', mainWindow.getSize())     
+    store.set('window.size', mainWindow.getSize())
   })
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();
@@ -81,7 +81,7 @@ const createTray = () => {
 
 const show = () => {
   mainWindow.show()
-  if(process.platform == "darwin" ) {
+  if (process.platform == "darwin") {
     app.dock.show()
   }
 }
@@ -102,14 +102,10 @@ app.on('ready', () => {
   createWindow()
   createLeftMenu()
   show()
-
-  globalShortcut.register("Alt+T", () => {
-    show()
-  })
 });
 
 app.on('ready', () => {
-  if(process.platform == "darwin"){
+  if (process.platform == "darwin") {
     app.dock.hide()
   }
 })

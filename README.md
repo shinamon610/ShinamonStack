@@ -12,7 +12,6 @@ In ShinamonStack you use command to edit your tasks.
 here is all command.
 * command + q : quit app and save your tasks
 * command + w : hide app
-* alt + t : show app (this is set as global shortcut)
 * n : push new task
 * y : pop task
 * r : rename selected task
