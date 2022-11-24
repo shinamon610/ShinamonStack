@@ -1,5 +1,5 @@
 # ShinamonStack
-ShinamonStack is the to-do list app made by electron.
+ShinamonStack is the best to-do list app made by electron.
 
 # Feature
 You use only keyboard to operate ShinamonStack.
