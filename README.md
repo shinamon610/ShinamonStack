@@ -7,7 +7,13 @@ ShinamonStack is "Stack" (first in last out), but you can chage priority of your
 ShinamonStack is checked to run in only mac.
 
 # How to use
-git clone and do 'yarn make' in your terminal.
+git clone and do 
+```
+npm install electron
+yarn make
+```
+in your terminal.
+
 In ShinamonStack you use command to edit your tasks.
 here is all command.
 * command + q : quit app and save your tasks
