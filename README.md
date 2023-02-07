@@ -9,7 +9,8 @@ ShinamonStack is checked to run in only mac.
 # How to use
 ```
 git clone
-npm install electron
+yarn add electron-forge
+yarn add --dev electron-prebuilt-compile
 yarn make
 ```
 in your terminal.
