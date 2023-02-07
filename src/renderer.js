@@ -224,7 +224,7 @@ const process = (e, taskArray) => {
     }
   } else if (e.key === "y") {
     if (getCurrentState(taskArray) === State.normal) {
-      if (taskArray.length == 0) return;
+      if (taskArray.length == 0) return taskArray;
       //pop動作
       undoArray.unshift(taskArray.shift())
       selectTask(taskArray, 0)
@@ -235,7 +235,7 @@ const process = (e, taskArray) => {
   }
   else if (e.key === "Enter") {
     //変換確定のEnterのときはなにもしない
-    if (e.isComposing) return
+    if (e.isComposing) return taskArray
     if (getCurrentState(taskArray) === State.inputtingTitle) {
       //入力タイトルを確定する
       refrection(taskArray)
@@ -306,7 +306,7 @@ const process = (e, taskArray) => {
   else if (e.key === "u") {
     if (getCurrentState(taskArray) === State.normal) {
       //undoする
-      if (undoArray.length == 0) return;
+      if (undoArray.length == 0) return taskArray;
       taskArray.unshift(undoArray.shift())
       selectTask(taskArray, 0)
       e.preventDefault()
