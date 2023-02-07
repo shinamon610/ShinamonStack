@@ -46,7 +46,7 @@ const createWindow = () => {
     store.set('window.size', mainWindow.getSize())
   })
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 };
 
 //左上のメニューバーを変更する
@@ -114,8 +114,8 @@ app.on('ready', () => {
 ipcMain.on("getInitialArray", (event) => {
   if (store.has("task")) {
     // デバッグのためにコメントアウト
-    // event.returnValue = store.get("task")
-    event.returnValue = []
+    event.returnValue = store.get("task")
+    // event.returnValue = []
   } else {
     event.returnValue = []
   }
