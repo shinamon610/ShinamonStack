@@ -46,7 +46,7 @@ const createWindow = () => {
     store.set('window.size', mainWindow.getSize())
   })
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 };
 
 //左上のメニューバーを変更する
