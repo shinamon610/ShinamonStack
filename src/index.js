@@ -113,7 +113,9 @@ app.on('ready', () => {
 //初期配列を取得
 ipcMain.on("getInitialArray", (event) => {
   if (store.has("task")) {
-    event.returnValue = store.get("task")
+    // デバッグのためにコメントアウト
+    // event.returnValue = store.get("task")
+    event.returnValue = []
   } else {
     event.returnValue = []
   }
