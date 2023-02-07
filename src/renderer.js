@@ -211,8 +211,111 @@ const getCurrentState = (taskArray) => {
   }
 }
 
-const process = (taskArray, parent_id) => {
+const process = (e, taskArray) => {
+  if (e.key === "n") {
+    if (getCurrentState(taskArray) === State.normal) {
+      //push動作
+      taskArray.unshift(new Task())
+      selectTask(taskArray, 0)
+      startInputtingTitle(taskArray, 0)
+      e.preventDefault()
+      //再描写
+      arrayToItem(taskArray)
+    }
+  } else if (e.key === "y") {
+    if (getCurrentState(taskArray) === State.normal) {
+      if (taskArray.length == 0) return;
+      //pop動作
+      undoArray.unshift(taskArray.shift())
+      selectTask(taskArray, 0)
+      e.preventDefault()
+      //再描写
+      arrayToItem(taskArray)
+    }
+  }
+  else if (e.key === "Enter") {
+    //変換確定のEnterのときはなにもしない
+    if (e.isComposing) return
+    if (getCurrentState(taskArray) === State.inputtingTitle) {
+      //入力タイトルを確定する
+      refrection(taskArray)
+      finishInputting(taskArray)
+      //再描写
+      arrayToItem(taskArray)
+    }
+  }
+  else if (e.key === "j" || e.key === "ArrowDown") {
+    if (getCurrentState(taskArray) === State.normal) {
+      //下のtaskを選択する
+      selectTaskBelow(taskArray)
+      //再描写
+      arrayToItem(taskArray)
+    }
+  } else if (e.key === "k" || e.key === "ArrowUp") {
+    if (getCurrentState(taskArray) === State.normal) {
+      //上のタスクを選択する
+      selectTaskAbove(taskArray)
+      //再描写
+      arrayToItem(taskArray)
+    }
+  }
+  else if (e.key === "h" || e.key === "ArrowLeft") {
+    if (getCurrentState(taskArray) === State.normal) {
+      //下のタスクと入れ替える
+      taskArray = swapTaskBelow(taskArray)
+      //再描写
+      arrayToItem(taskArray)
+    }
+  }
+  else if (e.key === "l" || e.key === "ArrowRight") {
+    if (getCurrentState(taskArray) === State.normal) {
+      //上のタスクと入れ替える
+      taskArray = swapTaskAbove(taskArray)
+      //再描写
+      arrayToItem(taskArray)
+    }
+  }
+  else if (e.key === "r") {
+    if (getCurrentState(taskArray) === State.normal) {
+      //titleをrename
+      startInputtingTitle(taskArray, getSelectedIndex(taskArray))
+      e.preventDefault()
+      //再描写
+      arrayToItem(taskArray)
+    }
+  }
+  else if (e.key === "m") {
+    if (getCurrentState(taskArray) === State.normal) {
+      //メモをinput
+      startInputtingMemo(taskArray, getSelectedIndex(taskArray))
+      e.preventDefault()
+      //再描写
+      arrayToItem(taskArray)
+    }
+  }
+  else if (e.key === "Escape") {
+    if (getCurrentState(taskArray) !== State.normal) {
+      //inputting memoを終了
+      refrection(taskArray)
+      finishInputting(taskArray)
+      e.preventDefault()
+      //再描写
+      arrayToItem(taskArray)
+    }
+  }
+  else if (e.key === "u") {
+    if (getCurrentState(taskArray) === State.normal) {
+      //undoする
+      if (undoArray.length == 0) return;
+      taskArray.unshift(undoArray.shift())
+      selectTask(taskArray, 0)
+      e.preventDefault()
 
+      //再描写
+      arrayToItem(taskArray)
+    }
+  }
+  return taskArray
 }
 
 window.onload = () => {
@@ -222,110 +325,7 @@ window.onload = () => {
   arrayToItem(taskArray)
   document.body.onkeydown = (e) => {
     e = e || window.event
-    if (e.key === "n") {
-      if (getCurrentState(taskArray) === State.normal) {
-        //push動作
-        taskArray.unshift(new Task())
-        selectTask(taskArray, 0)
-        startInputtingTitle(taskArray, 0)
-        e.preventDefault()
-        //再描写
-        arrayToItem(taskArray)
-      }
-    } else if (e.key === "y") {
-      if (getCurrentState(taskArray) === State.normal) {
-        if (taskArray.length == 0) return;
-        //pop動作
-        undoArray.unshift(taskArray.shift())
-        selectTask(taskArray, 0)
-        e.preventDefault()
-        //再描写
-        arrayToItem(taskArray)
-      }
-    }
-    else if (e.key === "Enter") {
-      //変換確定のEnterのときはなにもしない
-      if (e.isComposing) return
-      if (getCurrentState(taskArray) === State.inputtingTitle) {
-        //入力タイトルを確定する
-        refrection(taskArray)
-        finishInputting(taskArray)
-        //再描写
-        arrayToItem(taskArray)
-      }
-    }
-    else if (e.key === "j" || e.key === "ArrowDown") {
-      if (getCurrentState(taskArray) === State.normal) {
-        //下のtaskを選択する
-        selectTaskBelow(taskArray)
-        //再描写
-        arrayToItem(taskArray)
-      }
-    } else if (e.key === "k" || e.key === "ArrowUp") {
-      if (getCurrentState(taskArray) === State.normal) {
-        //上のタスクを選択する
-        selectTaskAbove(taskArray)
-        //再描写
-        arrayToItem(taskArray)
-      }
-    }
-    else if (e.key === "h" || e.key === "ArrowLeft") {
-      if (getCurrentState(taskArray) === State.normal) {
-        //下のタスクと入れ替える
-        taskArray = swapTaskBelow(taskArray)
-        //再描写
-        arrayToItem(taskArray)
-      }
-    }
-    else if (e.key === "l" || e.key === "ArrowRight") {
-      if (getCurrentState(taskArray) === State.normal) {
-        //上のタスクと入れ替える
-        taskArray = swapTaskAbove(taskArray)
-        //再描写
-        arrayToItem(taskArray)
-      }
-    }
-    else if (e.key === "r") {
-      if (getCurrentState(taskArray) === State.normal) {
-        //titleをrename
-        startInputtingTitle(taskArray, getSelectedIndex(taskArray))
-        e.preventDefault()
-        //再描写
-        arrayToItem(taskArray)
-      }
-    }
-    else if (e.key === "m") {
-      if (getCurrentState(taskArray) === State.normal) {
-        //メモをinput
-        startInputtingMemo(taskArray, getSelectedIndex(taskArray))
-        e.preventDefault()
-        //再描写
-        arrayToItem(taskArray)
-      }
-    }
-    else if (e.key === "Escape") {
-      if (getCurrentState(taskArray) !== State.normal) {
-        //inputting memoを終了
-        refrection(taskArray)
-        finishInputting(taskArray)
-        e.preventDefault()
-        //再描写
-        arrayToItem(taskArray)
-      }
-    }
-    else if (e.key === "u") {
-      if (getCurrentState(taskArray) === State.normal) {
-        //undoする
-        if (undoArray.length == 0) return;
-        taskArray.unshift(undoArray.shift())
-        selectTask(taskArray, 0)
-        e.preventDefault()
-
-        //再描写
-        arrayToItem(taskArray)
-      }
-    }
-
+    taskArray = process(e, taskArray)
     //taskArrayをMainと同期する
     saveTaskArray(taskArray);
   }
