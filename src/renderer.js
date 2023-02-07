@@ -225,7 +225,7 @@ window.onload = () => {
     if (e.key === "n") {
       if (getCurrentState(taskArray) === State.normal) {
         //push動作
-        taskArray.unshift(new Task(""))
+        taskArray.unshift(new Task())
         selectTask(taskArray, 0)
         startInputtingTitle(taskArray, 0)
         e.preventDefault()
