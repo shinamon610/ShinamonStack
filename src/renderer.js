@@ -211,8 +211,10 @@ const getCurrentState = (taskArray) => {
   }
 }
 
-let taskArray;
-let undoArray;
+const process = (taskArray, parent_id) => {
+
+}
+
 window.onload = () => {
   taskArray = ipcRenderer.sendSync("getInitialArray")
   undoArray = []
