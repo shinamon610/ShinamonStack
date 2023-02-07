@@ -7,5 +7,6 @@ module.exports = class Task {
     this.isInputtingTitle = false
     this.isInputtingTimer = false
     this.isInputtingMemo = false
+    this.children = []
   }
 }
