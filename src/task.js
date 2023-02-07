@@ -1,6 +1,14 @@
+const crypto = require("crypto")
+module.exports = class Area {
+  constructor() {
+    this.selected = true
+    this.taskArray = []
+  }
+}
 module.exports = class Task {
-  constructor(title) {
-    this.title = title
+  constructor() {
+    this.id = crypto.randomUUID()
+    this.title = ""
     this.timer = null;
     this.memo = null;
     this.selected = false
