@@ -1,39 +1,49 @@
-html{
+html {
   height: 100%;
   width: 100%;
 }
+
 body {
   height: 100%;
   width: 100%;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   margin: auto;
+  background-color: black;
 }
+
 .container {
   display: grid;
   width: 100%;
   height: 100%;
   grid-template-columns: 40% 1fr;
 }
-.title{
+
+.title {
   display: grid;
   grid-template-columns: 100%;
   grid-auto-rows: 20px;
-  border: 1px solid black
+  border: 1px solid gray;
 }
-.memo{
+
+.memo {
+  background-color: black;
   display: grid;
-  border: 1px solid black
+  border: 1px solid gray;
+  color: white;
 }
 
 .item {
-  background-color: white;
+  background-color: black;
   height: 20px;
   text-align: left;
-  border: 1px solid black
+  border: 1px solid gray;
+  color: gray;
 }
-.selected-item{
+
+.selected-item {
   background-color: aqua;
   height: 20px;
   text-align: left;
-  border: 1px solid black
+  border: 1px solid gray;
+  color: black;
 }
